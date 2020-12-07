@@ -53,7 +53,7 @@ function populateCardFront(pokemon) {
     let frontLabel = document.createElement('h3');
     let frontImage = document.createElement('img');
     frontLabel.textContent = capitalizeFirstLetter(pokemon.name);
-    frontImage.src = `../playing-cards/poke-imgs/${getImageFileName(pokemon)}.png`;
+    frontImage.src = `poke-imgs/${getImageFileName(pokemon)}.png`;
     cardFront.appendChild(frontImage);
     cardFront.appendChild(frontLabel);
     return cardFront;

@@ -18,7 +18,6 @@ function loadPage() {
             })
         }
     })
-
 }
 
 const pokeGrid = document.querySelector('.pokeGrid');
@@ -51,9 +50,9 @@ function populateCardFront(pokemon) {
     else {
         cardFront.className = `card_face ${pokemon.types[0].type.name}-type`;
     }
-    let frontLabel = document.createElement('p');
+    let frontLabel = document.createElement('h3');
     let frontImage = document.createElement('img');
-    frontLabel.textContent = pokemon.name;
+    frontLabel.textContent = capitalizeFirstLetter(pokemon.name);
     frontImage.src = `../playing-cards/poke-imgs/${getImageFileName(pokemon)}.png`;
     cardFront.appendChild(frontImage);
     cardFront.appendChild(frontLabel);
@@ -63,9 +62,36 @@ function populateCardFront(pokemon) {
 function populateCardBack(pokemon) {
     let cardBack = document.createElement('div');
     cardBack.className = `card_face card_face_back`;
-    let backLabel = document.createElement('p');
-    backLabel.textContent = "Back of card";
-    cardBack.appendChild(backLabel);
+
+    let backLabelHeader = document.createElement('h3');
+    backLabelHeader.textContent = "Stats";
+    cardBack.appendChild(backLabelHeader);
+
+    let backLabelType = document.createElement('p');
+    backLabelType.textContent = `Type: `;
+    for(let i = 0; i < pokemon.types.length; i++) {
+        backLabelType.textContent += `${pokemon.types[i].type.name}`;
+        backLabelType.textContent += `-`;
+    }
+    backLabelType.textContent = backLabelType.textContent.substring(0,backLabelType.textContent.length-1);
+    cardBack.appendChild(backLabelType);
+
+    let backLabelHeightWeight = document.createElement('p');
+    backLabelHeightWeight.textContent = `Height: ${pokemon.height}\nWeight: ${pokemon.weight}`;
+    cardBack.appendChild(backLabelHeightWeight);
+
+    let backLabelStats = document.createElement('p');
+    for(let i = 0; i < pokemon.stats.length; i++) {
+        backLabelStats.textContent += `${capitalizeFirstLetter(pokemon.stats[i].stat.name)}: ${pokemon.stats[i].base_stat}\n`;
+    }
+    cardBack.appendChild(backLabelStats);
+
+    for(let i = 0; i < pokemon.types.length; i++) {
+        let backLabelTypeLogo = document.createElement('img');
+        backLabelTypeLogo.src = `../playing-cards/type-imgs/${pokemon.types[i].type.name}-type.jpg`;
+        cardBack.appendChild(backLabelTypeLogo);
+    }
+
     return cardBack;
 }
 
@@ -79,6 +105,10 @@ function getImageFileName(pokemon) {
     else if(pokemon.id > 99) {
         return pokemon.id;
     }
+}
+
+function capitalizeFirstLetter(name) {
+    return name[0].toUpperCase()+name.substring(1);
 }
 
 loadPage();

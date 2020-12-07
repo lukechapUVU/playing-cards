@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url('../playing-cards/pokeball-repeating-background.jpg');
+    background-image: url('pokeball-repeating-background.jpg');
 }
 
 h1, h4 {
@@ -87,17 +87,17 @@ p {
     color: black;
 }
 .grass-poison-type {
-    background-image: url("../playing-cards/type-imgs/grass-poison-background.jpg");
+    background-image: url("type-imgs/grass-poison-background.jpg");
 }
 .fire-flying-type {
-    background-image: url("../playing-cards/type-imgs/fire-flying-background.jpg");
+    background-image: url("type-imgs/fire-flying-background.jpg");
 }
 .bug-flying-type {
-    background-image: url("../playing-cards/type-imgs/bug-flying-background.jpg");
+    background-image: url("type-imgs/bug-flying-background.jpg");
 }
 .bug-poison-type {
-    background-image: url("../playing-cards/type-imgs/bug-poison-background.jpg");
+    background-image: url("type-imgs/bug-poison-background.jpg");
 }
 .normal-flying-type {
-    background-image: url("../playing-cards/type-imgs/normal-flying-background.jpg");
+    background-image: url("type-imgs/normal-flying-background.jpg");
 }

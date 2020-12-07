@@ -88,7 +88,7 @@ function populateCardBack(pokemon) {
 
     for(let i = 0; i < pokemon.types.length; i++) {
         let backLabelTypeLogo = document.createElement('img');
-        backLabelTypeLogo.src = `../playing-cards/type-imgs/${pokemon.types[i].type.name}-type.jpg`;
+        backLabelTypeLogo.src = `type-imgs/${pokemon.types[i].type.name}-type.jpg`;
         cardBack.appendChild(backLabelTypeLogo);
     }
 

@@ -10,9 +10,10 @@ async function getAPIData(url) {
 }
 
 function loadPage() {
-    getAPIData(`https://pokeapi.co/api/v2/pokemon`).then
+    getAPIData(`https://pokeapi.co/api/v2/pokemon?limit=25`).then
     (async (data) => {
         for(const pokemon of data.results) {
+            console.log(data);
             await getAPIData(pokemon.url).then((pokeData) => {
                 populatePokeCard(pokeData);
             })
@@ -28,19 +29,47 @@ function populatePokeCard(pokemon) {
     pokeScene.className = 'scene';
     let pokeCard = document.createElement('div');
     pokeCard.className = 'card';
-    let cardFront = document.createElement('div');
-    let frontLabel = document.createElement('p');
-    let cardBack = document.createElement('div');
-    let backLabel = document.createElement('p');
+    pokeCard.addEventListener('click', () => {
+        pokeCard.classList.toggle('is-flipped');
+    })
 
-    frontLabel.textContent = pokemon.name;
-    backLabel.textContent = "Back of card";
-    cardFront.appendChild(frontLabel);
-    cardBack.appendChild(backLabel);
-    pokeCard.appendChild(cardFront);
-    pokeCard.appendChild(cardBack);
+    pokeCard.appendChild(populateCardFront(pokemon));
+    pokeCard.appendChild(populateCardBack(pokemon));
     pokeScene.appendChild(pokeCard);
     pokeGrid.appendChild(pokeScene);
+}
+
+function populateCardFront(pokemon) {
+    let cardFront = document.createElement('div');
+    cardFront.className = `card_face card_face_front`;
+    let frontLabel = document.createElement('p');
+    let frontImage = document.createElement('img');
+    frontLabel.textContent = pokemon.name;
+    frontImage.src = `../playing-cards/poke-imgs/${getImageFileName(pokemon)}.png`;
+    cardFront.appendChild(frontImage);
+    cardFront.appendChild(frontLabel);
+    return cardFront;
+}
+
+function populateCardBack(pokemon) {
+    let cardBack = document.createElement('div');
+    cardBack.className = `card_face card_face_back`;
+    let backLabel = document.createElement('p');
+    backLabel.textContent = "Back of card";
+    cardBack.appendChild(backLabel);
+    return cardBack;
+}
+
+function getImageFileName(pokemon) {
+    if(pokemon.id < 10) {
+        return `00${pokemon.id}`;
+    }
+    else if(pokemon.id > 9 && pokemon.id < 99) {
+        return `0${pokemon.id}`;
+    }
+    else if(pokemon.id > 99) {
+        return pokemon.id;
+    }
 }
 
 loadPage();

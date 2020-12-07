@@ -33,10 +33,6 @@
     backface-visibility: hidden;
 }
 
-.card_face_front {
-    background: red;
-}
-
 .card_face_back {
     background: blue;
     transform: rotateY(180deg);
@@ -44,4 +40,45 @@
 
 .is-flipped {
     transform: rotateY(180deg);
+}
+
+/*Type Colors*/
+.poison-type {
+    background: purple;
+}
+.grass-type {
+    background: green;
+}
+.fire-type {
+    background: red;
+}
+.flying-type {
+    background: lightblue;
+}
+.water-type {
+    background: blue;
+}
+.bug-type {
+    background: darkolivegreen;
+}
+.normal-type {
+    background: beige;
+}
+.electric-type {
+    background: yellow;
+}
+.grass-poison-type {
+    background-image: url("../playing-cards/type-imgs/grass-poison-background.jpg")
+}
+.fire-flying-type {
+    background-image: url("../playing-cards/type-imgs/fire-flying-background.jpg")
+}
+.bug-flying-type {
+    background-image: url("../playing-cards/type-imgs/bug-flying-background.jpg")
+}
+.bug-poison-type {
+    background-image: url("../playing-cards/type-imgs/bug-poison-background.jpg")
+}
+.normal-flying-type {
+    background-image: url("../playing-cards/type-imgs/normal-flying-background.jpg")
 }

@@ -13,7 +13,6 @@ function loadPage() {
     getAPIData(`https://pokeapi.co/api/v2/pokemon?limit=25`).then
     (async (data) => {
         for(const pokemon of data.results) {
-            console.log(data);
             await getAPIData(pokemon.url).then((pokeData) => {
                 populatePokeCard(pokeData);
             })
@@ -32,7 +31,6 @@ function populatePokeCard(pokemon) {
     pokeCard.addEventListener('click', () => {
         pokeCard.classList.toggle('is-flipped');
     })
-
     pokeCard.appendChild(populateCardFront(pokemon));
     pokeCard.appendChild(populateCardBack(pokemon));
     pokeScene.appendChild(pokeCard);
@@ -41,7 +39,18 @@ function populatePokeCard(pokemon) {
 
 function populateCardFront(pokemon) {
     let cardFront = document.createElement('div');
-    cardFront.className = `card_face card_face_front`;
+    
+    if(pokemon.types.length == 2) {
+        let typeConcat = "";
+        for(let i = 0; i < pokemon.types.length; i++) {
+            typeConcat += pokemon.types[i].type.name+"-";
+        }
+        typeConcat += "type";
+        cardFront.className = `card_face ${typeConcat}`;
+    }
+    else {
+        cardFront.className = `card_face ${pokemon.types[0].type.name}-type`;
+    }
     let frontLabel = document.createElement('p');
     let frontImage = document.createElement('img');
     frontLabel.textContent = pokemon.name;
